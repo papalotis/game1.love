@@ -95,7 +95,7 @@ end
 function love.draw()
 
     if (follower) then
-        print(l.camera_left)
+
         cam:setWorld(l.camera_left,l.camera_top,l.width, l.height)
         cam:setPosition(follower.pos.x, follower.pos.y)
     end

@@ -11,7 +11,7 @@ function Wall.init(self, x, y, w, h, group)
 end
 
 function Wall.update(self, globalGroup, colours)
-    -- print(colours)
+    
     self.colour = colours[self.group]
 
     self.active = self.group == globalGroup

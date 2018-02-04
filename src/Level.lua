@@ -85,7 +85,7 @@ function Level.readFromFile(self, filename)
                     table.insert(self.colours,game_colours[value])
 
                 else
-                    print(key, value)
+                    
                     --this is for normal values
                     self[key] = value
                 end
