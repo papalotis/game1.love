@@ -60,7 +60,6 @@ function love.keyreleased(key)
 end
 
 function love.load(arg)
-    print("this is the brach")
 
     --this makes the canvas not blurry
     love.graphics.setDefaultFilter( "nearest", "nearest" )

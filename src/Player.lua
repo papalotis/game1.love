@@ -18,6 +18,9 @@ function Player.init(self, x, y)
 
     self.colour = game_colours.dark_red
 
+    self.onplatform = nil
+    self.outside_speed = vector(0,0)
+
     self.stuck_counter = 0
 end
 
@@ -26,8 +29,11 @@ function Player.update(self, gravity)
 
     self:checkIfStuck()
 
-
-    self:applyGravity(gravity)
+    if (self.onplatform) then
+        self.pos.y = self.onplatform.pos.y - self.h
+    else
+        self:applyGravity(gravity)
+    end
     self:setUserAcceleration()
 
     --if the user doesnt apply any horizontal movement slow down the player
@@ -45,15 +51,20 @@ function Player.update(self, gravity)
     if (abs(self.speed.x) < 0.4) then self.speed.x = 0 end
 
     self.speed = self.speed + self.acc
+    self.speed = self.speed + self.outside_speed
 
 
     local newPos = self.pos + self.speed
     --mpve player to new position step by step
     self:moveToPos(newPos:unpack())
 
+    self.speed = self.speed - self.outside_speed
+
     if (self.pos.y > l.height) then self.pos.y = 0 end
 
     self.acc = vector(0,0)
+    self.onplatform = nil
+    self.outside_speed = vector(0,0)
 end
 
 function Player.moveToPos(self, x, y)
