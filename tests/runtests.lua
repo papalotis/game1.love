@@ -12,9 +12,9 @@ end
 local file_table = scandir("./")
 local ignore = {["runtests.lua"] = true, ["luaunit.lua"] = true}
 
-for k,fname in pairs(file_table) do
+for _,fname in pairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        os.execute("lua " .. fname)
+        os.execute("lua5.1 " .. fname)
     end
 end
