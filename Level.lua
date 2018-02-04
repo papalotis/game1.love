@@ -70,7 +70,8 @@ function Level.readFromFile(self, filename)
                 key, value = key:trim(), value:trim()
 
                 --attempt to convert the value to a number
-                value = tonumber(vallue) or value
+                value = tonumber(value) or value
+
 
                 --if we just read a colour (that is one of the colours that will be used
                 --for the walls) then
@@ -80,7 +81,7 @@ function Level.readFromFile(self, filename)
                 else
 
                     --this is for normal values
-                    self[key] = val
+                    self[key] = value
                 end
             end
 
