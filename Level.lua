@@ -73,11 +73,13 @@ function Level.readFromFile(self, filename)
                 value = tonumber(value) or value
 
 
+
                 --if we just read a colour (that is one of the colours that will be used
                 --for the walls) then
                 if (key:sub(1,6) == "colour") then
                     --inset the colour to the colours table
-                    table.insert(self.colours,game_colours[val])
+                    table.insert(self.colours,game_colours[value])
+                    
                 else
 
                     --this is for normal values
