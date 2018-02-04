@@ -1,4 +1,5 @@
 !!this is a comment
+!!This is a test to check if branching works correctly
 WorldProperties
 width :600
 height:600
