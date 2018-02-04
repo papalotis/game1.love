@@ -90,36 +90,61 @@ function Level.readFromFile(self, filename)
             --make a table that contains all those key value pairs
             --as strings
             local fields = mysplit(line, ",")
+
+            --table that holds the arguments
             local vals = {}
 
             --the first element is not a key value pair
-            --it tells us what kind of object will 
+            --it tells us what kind of object will be created
             local obj_type = fields[1]
+
+            --for the rest of the key, val pairs
             for i=2, #fields do
                 local str = fields[i]
+
+                --the key, val are separated by a :
+                --(like the properties) so we split the
+                --string into two substrings that are split by a :
                 local substr = mysplit(str, ":")
 
+                --attempt to convert the value to a number
                 local val = tonumber(substr[2]) or substr[2]
+
+                --insert the value to the arguments table
                 table.insert(vals,val)
             end
 
-
+            --get the constructor of the object we want to make
             local obj = _G[obj_type]
+            --r will hold the instance of the object that we will make
             local r = nil
-            if (obj) then
 
+            --if there is a constructor for the object we want to make
+            if (obj) then
+                --create the object with the arguments we stored in the vals table
                 r = obj(unpack(vals))
             end
 
+            --if an object was created
             if (r) then
+                --insert it into the world
                 table.insert(self.world,r)
+
+                --if the object we made was of type player
                 if (r.isplayerobject) then
+                    --store that instance in the player member
                     self.player = r
+                    --and also store it in the moving objects table
                     table.insert(self.moving_objects,r)
                 end
+
+                --enemy objects can also move
                 if (r.isenemyobject) then
+                    --so we also add them to the moving_objects table
                     table.insert(self.moving_objects,r)
                 end
+
+                --we need to store the camera follower in its own member
                 if (r.iscamerafollowerobject) then
                     self.follower = r
                 end
@@ -131,22 +156,34 @@ function Level.readFromFile(self, filename)
     end
 end
 
+--runs one tick(step, frame) of the level
 function Level.run(self)
     local player_dies = false
     local load_next_level = false
 
+    --when the player presses the space key swap
+    --which walls are active (collidable)
     self.activeWallGroup = 1
     if (keys["space"]) then
         self.activeWallGroup = 2
     end
 
+    --for every element in the world run its update function
+    --different objects need different arguments for their update
+    --so there is an if-elseif-...-else statement that looks at what kind
+    --of object the current one is and gives it the appropriate arguments
     for _,elem in pairs(self.world) do
         if (elem.isplayerobject) then
             elem:update(self.gravity)
 
         elseif (elem.isenemyobject) then
+            --an enemy object also tells us if that enemy killed the player
+            --so we compare what the enemy says with the general 'consensus'
+            local this_enemy_kills_the_player = elem:update(self.player, self.gravity)
 
-            player_dies = elem:update(self.player, self.gravity)
+            --if at least one enemy claims to kill the player then we want to kill
+            --that player
+            player_dies = player_dies or this_enemy_kills_the_player
 
         elseif (elem.ismovingwallobject) then
 
@@ -166,10 +203,13 @@ function Level.run(self)
         end
     end
 
+    --if the level exit object says that we should move to the next levels
+    --then move to the next level
     if (load_next_level) then
         self:loadNextLevel()
     end
 
+    --f
     if (player_dies) then
         self:reload()
     end
