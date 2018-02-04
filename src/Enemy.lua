@@ -17,6 +17,10 @@ function Enemy.init(self, x, y, r, xspd, yspd)
     -- self.acc = vector(0,0)
     self.colour = game_colours.bright_green
 
+    self.onplatform = nil
+    self.outside_speed = vector(0,0)
+
+
 
     self.angle = - math.pi / 2
 end
@@ -28,22 +32,35 @@ end
 
 
 function Enemy.update(self, player, gravity)
-    self:applyGravity(gravity)
+
+    if (self.onplatform) then
+        self.pos.y = self.onplatform.pos.y - self.h
+    else
+        self:applyGravity(gravity)
+    end
+
+    self.speed = self.speed + self.outside_speed
 
     local newpos = self.pos + self.speed
     local applied_speed = self:moveToPos(newpos.x, newpos.y)
-    local move_angle = applied_speed:toPolar().x / 30 * self.max_speed
+    self.speed  = self.speed - self.outside_speed
+
+    applied_speed = applied_speed - self.outside_speed
+    local move_angle = applied_speed:toPolar().x / 30 * self.speed:len()
     self.angle = (self.angle + move_angle) % (2 * math.pi)
 
     --check if there is a wall to the right of us
     if (collidesWithAnyWall(self.pos.x + 1, self.pos.y, self.w, self.h)) then
         --if so move tp the left
-        self.speed.x = - self.max_speed
+        self.speed.x = - self.speed:len()
     end
 
     if (collidesWithAnyWall(self.pos.x - 1, self.pos.y, self.w, self.h)) then
         self.speed.x =   self.max_speed
     end
+
+    self.onplatform = nil
+    self.outside_speed = vector(0,0)
 
     local collision = false
     if (player) then
@@ -51,6 +68,7 @@ function Enemy.update(self, player, gravity)
     end
 
     return collision
+
 
 
 end
