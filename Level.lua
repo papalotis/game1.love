@@ -209,7 +209,7 @@ function Level.run(self)
         self:loadNextLevel()
     end
 
-    --f
+    --if an enemy claims that it killed the player, reload the level
     if (player_dies) then
         self:reload()
     end
@@ -219,7 +219,11 @@ function Level.run(self)
     return player_dies
 end
 
+--this method runs the draw method of all the objects in the world
 function Level.render(self)
+    --like the run method, different objects require different arguments
+    --in their draw methods, so there is an if... that gives each
+    --object the appropriate arguments
     for _,elem in pairs(self.world) do
         if (not elem.ignore_camera and not elem.isplayerobject) then
             if (elem.islevelexitobject) then
@@ -229,30 +233,43 @@ function Level.render(self)
             end
         end
     end
+    --draw the player last
     if (self.player) then
         self.player:draw()
     end
 end
 
-
+--loads a level from a file
+--this methods creates a new level instance
+--and copies all the attribures to the current level instance
 function Level.load(self, filename)
     local nl = nil
-    if (self.next) then
+    if (filename) then
+        --create new level instance
         nl = Level(filename)
+        --reset the current level
+        self:reset()
+        --copy all attributes to self
+        for k,v in pairs(nl) do
+            self[k] = v
+        end
+        nl = nil
     end
-    self:reset()
-    for k,v in pairs(nl) do
-        self[k] = v
-    end
-    nl = nil
 end
 
+--reloads the current level
 function Level.reload(self)
-    self:load(self.file)
+    if (self.file) then
+        self:load(self.file)
+    end
 end
 
+--load the next level that is specified
+--in the .lvl file
 function Level.loadNextLevel(self)
-    self:load(self.next)
+    if (self.next) then
+        self:load(self.next)
+    end
 
 end
 
