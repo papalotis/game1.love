@@ -12,12 +12,13 @@ end
 local file_table = scandir("./")
 local ignore = {["runtests.lua"] = true, ["luaunit.lua"] = true}
 
-for _,fname in pairs(file_table) do
+local counter = 1
+for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        res = os.execute("lua5.1 " .. fname)
+        res = os.execute("lua " .. fname)
 
-        if (not res) then os.exit(1) end
-
+        if (not res) then os.exit(counter) end
+        counter = counter + 1
     end
 end
