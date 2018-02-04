@@ -1,17 +1,17 @@
-vector = require "vector"
-require "utils"
-require "class"
-require "Level"
-require "WorldObject"
-require "Player"
-require "Enemy"
-require "CameraFollower"
-require "Wall"
-require "MovingWall"
-require "LevelExit"
-require "TextBox"
-require "Colour"
-gamera = require "gamera"
+vector = require "src.vector"
+require "src.utils"
+require "src.class"
+require "src.Level"
+require "src.WorldObject"
+require "src.Player"
+require "src.Enemy"
+require "src.CameraFollower"
+require "src.Wall"
+require "src.MovingWall"
+require "src.LevelExit"
+require "src.TextBox"
+require "src.Colour"
+gamera = require "src.gamera"
 
 
 
@@ -60,6 +60,7 @@ function love.keyreleased(key)
 end
 
 function love.load(arg)
+
     --this makes the canvas not blurry
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
@@ -71,7 +72,7 @@ function love.load(arg)
     --set the window
     love.window.setMode(1280, 720)
     -- love.window.setFullscreen(true)
-    print(l.camera_left)
+
     cam = gamera.new(l.camera_left,l.camera_top,l.width * 2, l.height * 2)
     --load the first level
 end
