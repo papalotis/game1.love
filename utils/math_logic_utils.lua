@@ -3,6 +3,8 @@ function boolToInt(b)
     return 0
 end
 
+
+
 --returns true if twp rectangles overlap
 function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and
@@ -24,7 +26,8 @@ function sign(n)
     return 0
 end
 
-function collidesWithAnyWall(x,y,w,h)
+function collidesWithAnyWall(x,y,w,h, walls)
+    walls = walls or l.world
     for _,elem in pairs(l.world) do
         if (elem.iswallobject and elem.active) then
             local r = nil
@@ -44,4 +47,15 @@ function collidesWithAnyWall(x,y,w,h)
     return nil
 end
 
+function curry(f) return function (x) return function (y) return f(x,y) end end end
+
 function compose(f, g) return function(...) return f(g(...)) end end
+
+return {boolToInt = boolToInt,
+        checkCollision = checkCollision,
+        rectContains = rectContains,
+        sign = sign,
+        collidesWithAnyWall = collidesWithAnyWall,
+        curry = curry,
+        compose = compose
+       }

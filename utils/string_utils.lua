@@ -13,6 +13,8 @@ end
 
 
 
-function string.trim(self)
-  return (self:gsub("^%s*(.-)%s*$", "%1"))
+function trim(str)
+  return (string.gsub( str, "^%s*(.-)%s*$", "%1"))
 end
+
+return {trim = trim, mysplit = mysplit}
