@@ -1,5 +1,3 @@
-
-
 --returns a table that contains all the lines of a file
 function getLinesFromFile(filename)
     local lines = {}
@@ -15,10 +13,12 @@ end
 --removes empty lines from a stirng table
 function removeEmptyLines(lines)
     for i=#lines,1, -1 do
-        if (lines[i] == "") then
+        str = lines[i]
+        if (str == "") then
             table.remove(lines, i)
         end
     end
+    return lines
 end
 
 function choose(...)
@@ -27,7 +27,8 @@ end
 
 function chooseRandomFromTable(tbl)
     assert(type(tbl) == "table", "Table exprected as argument")
-    local index = love.math.random(1, #tbl)
+    local rand = love and love.math.random or math.random
+    local index = rand(1, #tbl)
     return tbl[index]
 end
 
@@ -35,4 +36,13 @@ function setAll(tbl, val)
     for k,v in pairs(tbl) do
         tbl[k] = val
     end
+    return tbl
 end
+
+return {
+    getLinesFromFile = getLinesFromFile,
+    removeEmptyLines = removeEmptyLines,
+    choose = choose,
+    chooseRandomFromTable = chooseRandomFromTable,
+    setAll = setAll
+}

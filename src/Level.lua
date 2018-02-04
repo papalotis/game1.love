@@ -71,7 +71,7 @@ function Level.readFromFile(self, filename)
             local key, value = vals[1], vals[2];
             if (key and value) then
                 --trim the key and value (remove the leading and trailing spaces)
-                key, value = key:trim(), value:trim()
+                key, value = trim(key), trim(value)
 
                 --attempt to convert the value to a number
                 value = tonumber(value) or value
@@ -85,7 +85,7 @@ function Level.readFromFile(self, filename)
                     table.insert(self.colours,game_colours[value])
 
                 else
-                    
+
                     --this is for normal values
                     self[key] = value
                 end
