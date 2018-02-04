@@ -4,7 +4,7 @@ language: python
 sudo: false
 
 env:
-  - LUA="lua"
+  - LUA="lua=5.1"
   # - LUA="lua=5.2"
   # - LUA="lua=5.3"
   # - LUA="luajit=2.0"
@@ -25,7 +25,7 @@ install:
 script:
   # - luacheck --std max+busted *.lua spec
   # - busted --verbose --coverage
-  - lua tests/runtests.lua
+  - lua5.1 tests/runtests.lua
 
 # after_success:
 #   - luacov-coveralls -e $TRAVIS_BUILD_DIR/lua_install
