@@ -64,7 +64,9 @@ function love.load(arg)
     --this makes the canvas not blurry
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
-    l = Level("07.lvl")
+    --load the first level
+    l = Level("06.lvl")
+
     --the background should not be completely black
     local col = game_colours.black
     love.graphics.setBackgroundColor(col.red, col.green, col.blue, col.alpha)
@@ -73,8 +75,7 @@ function love.load(arg)
     love.window.setMode(1280, 720)
     -- love.window.setFullscreen(true)
 
-    cam = gamera.new(l.camera_left,l.camera_top,l.width * 2, l.height * 2)
-    --load the first level
+    cam = gamera.new(l.camera_left,l.camera_top,l.width, l.height)
 end
 
 function love.update(dt)
@@ -94,7 +95,8 @@ end
 function love.draw()
 
     if (follower) then
-
+        print(l.camera_left)
+        cam:setWorld(l.camera_left,l.camera_top,l.width, l.height)
         cam:setPosition(follower.pos.x, follower.pos.y)
     end
 

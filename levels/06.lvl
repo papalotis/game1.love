@@ -1,6 +1,6 @@
 !!this is a comment
 WorldProperties
-width :1200
+width :1500
 height:600
 next:07.lvl
 colour1:bright_red
@@ -15,7 +15,7 @@ TextBox,txt:Moving platforms are also a thing,x:200,y:300
 
 AlwaysActiveWall, x:200,y:500,w:500,h:0
 
-MovingWall,x:700,y:500,w:200,h:0,xdest:900,ydest:200,spd:1,wait:60
+MovingWall,x:900,y:200,w:200,h:0,xdest:700,ydest:500,spd:2,wait:60
 
 AlwaysActiveWall, x:1100,y:200,w:500,h:0
 

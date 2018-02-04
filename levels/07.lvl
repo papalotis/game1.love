@@ -2,8 +2,8 @@
 WorldProperties
 width :2000
 height:600
-camera_left:-400
-camera_top:-400
+camera_left:0
+camera_top:0
 next:07.lvl
 colour1:bright_red
 colour2:bright_green

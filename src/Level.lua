@@ -31,6 +31,10 @@ function Level.reset(self)
     self.next = nil
     self.gravity = 300 / 1000
     self.activeWallGroup = -1
+    self.camera_left = 0
+    self.camera_top = 0
+    self.width = 600
+    self.height = 600
 end
 
 
@@ -79,9 +83,9 @@ function Level.readFromFile(self, filename)
                 if (key:sub(1,6) == "colour") then
                     --inset the colour to the colours table
                     table.insert(self.colours,game_colours[value])
-                    
-                else
 
+                else
+                    print(key, value)
                     --this is for normal values
                     self[key] = value
                 end
