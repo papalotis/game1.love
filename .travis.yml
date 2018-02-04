@@ -25,7 +25,7 @@ install:
 script:
   # - luacheck --std max+busted *.lua spec
   # - busted --verbose --coverage
-  - lua5.1 simple.lua
+  - lua simple.lua
 
 # after_success:
 #   - luacov-coveralls -e $TRAVIS_BUILD_DIR/lua_install
