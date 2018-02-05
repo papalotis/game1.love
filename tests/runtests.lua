@@ -21,11 +21,12 @@ local fail = 0
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        local res = loadfile(directory .. fname)()
+        local bool, str, num = os.execute("lua " ..  directory .. fname)
 
-        print("Test exited with status " .. res)
+        -- print("Test exited with status " .. res)
+        print(num)
 
-        if (res ~= 0) then fail = counter end
+        if (num ~= 0) then fail = counter end
         counter = counter + 1
     end
 end

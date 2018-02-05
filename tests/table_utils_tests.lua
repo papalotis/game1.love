@@ -53,4 +53,4 @@ end
 
 local runner = lu.LuaUnit.new()
 runner:setOutputType("tap")
-return runner:runSuite()
+os.exit( runner:runSuite() )
