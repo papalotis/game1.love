@@ -26,7 +26,7 @@ for i,fname in ipairs(file_table) do
         -- print("Test exited with status " .. res)
         print(bool)
 
-        if (bool) then fail = counter end
+        if (bool ~= 0) then fail = counter end
         counter = counter + 1
     end
 end
