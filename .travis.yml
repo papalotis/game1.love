@@ -5,7 +5,6 @@ sudo: false
 
 env:
   - LUA="lua=5.1"
-  - IS_ON_SERVER="true"
   # - LUA="lua=5.2"
   # - LUA="lua=5.3"
   # - LUA="luajit=2.0"

@@ -23,10 +23,11 @@ for i,fname in ipairs(file_table) do
         print("\n" .. fname)
         local res_server, _, res_mylaptop = os.execute("lua " ..  directory .. fname)
 
-        local env = os.getenv("IS_ON_SERVER")
+        local env = os.getenv("TRAVIS")
 
+        print(env)
         local test_failed
-        if (env == "true") then
+        if (env == true) then
             test_failed = res_server ~= 0
         else
             test_failed = res_mylaptop ~= 0
