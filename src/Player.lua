@@ -1,6 +1,7 @@
 local WorldObject = require "src.WorldObject"
 local vector = require "src.vector"
 local Colour = require "src.Colour"
+local lmutils = require "utils.math_logic_utils"
 local Player = WorldObject:extend()
 
 function Player.init(self, x, y)
@@ -89,7 +90,7 @@ function Player.moveToPos(self, x, y)
         local move_part_x = move_part * sin(phi)
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h)
+        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h)
         --we collided horizontaly with a wall
         if (wall) then
             --kill our horizontal speed and break out of the move loop
