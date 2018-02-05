@@ -17,12 +17,13 @@ local fail = 0
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        res = loadfile(fname)()
-        -- print(res)
+        local res = loadfile(fname)()
 
-        if (not res) then fail = counter end
+        print("Test exited with status " .. res)
+
+        if (res ~= 0) then fail = counter end
         counter = counter + 1
     end
 end
--- print(fail)
--- os.exit(fail)
+print(fail)
+os.exit(fail)

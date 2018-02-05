@@ -7,7 +7,7 @@ local mymath = loadfile("../utils/math_logic_utils.lua")()
 
 --tests to check if unit library works correctly
 function testPass()
-    lu.assertEquals(1, 1)
+    lu.assertEquals(1, 0)
     lu.assertEquals("string","string")
 end
 
@@ -62,4 +62,4 @@ end
 
 local runner = lu.LuaUnit.new()
 runner:setOutputType("tap")
-os.exit( runner:runSuite() )
+return runner:runSuite()
