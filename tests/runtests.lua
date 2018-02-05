@@ -28,6 +28,7 @@ for i,fname in ipairs(file_table) do
         print(env)
         local test_failed
         if (env == true) then
+            print(res_server)
             test_failed = res_server ~= 0
         else
             test_failed = res_mylaptop ~= 0
