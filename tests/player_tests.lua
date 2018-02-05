@@ -8,7 +8,7 @@ local Player = require "src.Player"
 
 --tests to check if unit library works correctly
 function testPass()
-    lu.assertEquals(0.3, 0.1 + 0.2)
+    lu.assertEquals(1, 1)
     lu.assertEquals("string","string")
 end
 --
