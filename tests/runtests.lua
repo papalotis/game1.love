@@ -21,12 +21,20 @@ local fail = 0
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        local bool = os.execute("lua " ..  directory .. fname)
+        local res_server, _, res_mylaptop = os.execute("lua " ..  directory .. fname)
 
-        -- print("Test exited with status " .. res)
-        print(bool)
+        local env = os.getenv("IS_ON_SERVER")
 
-        if (bool ~= 0) then fail = counter end
+        local test_failed
+        if (env == "true") then
+            test_failed = res_server ~= 0
+        else
+            test_failed = res_mylaptop ~= 0
+        end
+
+
+
+        if (test_failed) then fail = counter end
         counter = counter + 1
     end
 end
