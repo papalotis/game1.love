@@ -17,11 +17,12 @@ local fail = 0
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        res = os.execute("lua " .. fname)
+        res = loadfile(fname)()
+        -- print(res)
 
         if (not res) then fail = counter end
         counter = counter + 1
     end
 end
-print(fail)
-os.exit(fail)
+-- print(fail)
+-- os.exit(fail)
