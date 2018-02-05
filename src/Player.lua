@@ -1,4 +1,7 @@
-Player = WorldObject:extend()
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+local Colour = require "src.Colour"
+local Player = WorldObject:extend()
 
 function Player.init(self, x, y)
     self.isplayerobject = true
@@ -16,7 +19,11 @@ function Player.init(self, x, y)
     self.jump_force = 8
     self.jump_cap_force = 4.5
 
-    self.colour = game_colours.dark_red
+    if (game_colours) then
+        self.colour = game_colours.dark_red
+    else
+
+    end
 
     self.onplatform = nil
     self.outside_speed = vector(0,0)
@@ -175,3 +182,5 @@ function Player.draw(self)
     Colour.pop(nil)
     -- love.graphics.setColor(r,g,b,a)
 end
+
+return Player

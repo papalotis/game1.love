@@ -1,4 +1,4 @@
-Colour = class()
+local Colour = class()
 
 function Colour.init(self,r,g,b,a)
     self.iscolourobject = true
@@ -9,8 +9,10 @@ function Colour.init(self,r,g,b,a)
 end
 
 function Colour.push(self)
-    table.insert(colour_stack,self)
-    self:apply()
+    if (colour_stack) then
+        table.insert(colour_stack,self)
+        self:apply()
+    end
 end
 
 function Colour.pop(self)
@@ -48,5 +50,9 @@ function Colour.inverse(self)
 end
 
 function Colour.apply(self)
-    love.graphics.setColor(self.red, self.green, self.blue, self.alpha)
+    if (love) then
+        love.graphics.setColor(self.red, self.green, self.blue, self.alpha)
+    end
 end
+
+return Colour

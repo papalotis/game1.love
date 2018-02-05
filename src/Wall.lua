@@ -1,4 +1,6 @@
-Wall = WorldObject:extend();
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+local Wall = WorldObject:extend();
 
 function Wall.init(self, x, y, w, h, group)
     self.iswallobject = true
@@ -11,7 +13,7 @@ function Wall.init(self, x, y, w, h, group)
 end
 
 function Wall.update(self, globalGroup, colours)
-    
+
     self.colour = colours[self.group]
 
     self.active = self.group == globalGroup
@@ -32,10 +34,4 @@ function Wall.draw(self)
     self.colour:pop()
 end
 
-
-AlwaysActiveWall = Wall:extend()
-
-function AlwaysActiveWall.update(self)
-    self.colour = game_colours.light_gray
-    self.active = true
-end
+return Wall

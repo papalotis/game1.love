@@ -1,4 +1,7 @@
-LevelExit = WorldObject:extend()
+local vector = require "src.vector"
+local TextBox = require "src.TextBox"
+local WorldObject = require "src.WorldObject"
+local LevelExit = WorldObject:extend()
 
 function LevelExit.init(self, x, y, w, h)
     self.islevelexitobject = true
@@ -49,3 +52,5 @@ function LevelExit.draw(self, player)
 
     end
 end
+
+return LevelExit

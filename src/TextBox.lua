@@ -1,4 +1,9 @@
-TextBox = WorldObject:extend();
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+
+
+
+local TextBox = WorldObject:extend();
 
 function TextBox.init(self, txt, x, y, other)
     self.istextboxobject = true
@@ -20,3 +25,5 @@ function TextBox.draw(self)
 
     love.graphics.print(self.text, self.x, self.y, r, sx, sy, ox, oy, kx, ky)
 end
+
+return TextBox

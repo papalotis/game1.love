@@ -1,4 +1,7 @@
-MovingWall = Wall:extend()
+local Wall = require "src.Wall"
+local vector = require "src.vector"
+
+local MovingWall = Wall:extend()
 
 function MovingWall.init(self, x, y, w, h, xdest,ydest, spd, wait)
 
@@ -82,3 +85,5 @@ function MovingWall.update(self, moving_objects)
 
 
 end
+
+return MovingWall

@@ -16,6 +16,8 @@ local ignore = {["runtests.lua"] = true, ["luaunit.lua"] = true}
 
 local counter = 1
 local fail = 0
+
+
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)

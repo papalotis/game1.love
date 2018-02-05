@@ -1,3 +1,6 @@
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+
 Enemy = WorldObject:extend()
 
 function Enemy.init(self, x, y, r, xspd, yspd)
@@ -188,3 +191,5 @@ function Enemy.draw(self)
     -- love.graphics.rectangle("line", self.pos.x, self.pos.y, self.w, self.h)
 
 end
+
+return Enemy
