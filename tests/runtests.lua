@@ -26,9 +26,9 @@ for i,fname in ipairs(file_table) do
         local env = os.getenv("TRAVIS")
 
         print(env)
+        print(res_server)
         local test_failed
-        if (env == true) then
-            print(res_server)
+        if (env == "true") then
             test_failed = res_server ~= 0
         else
             test_failed = res_mylaptop ~= 0
