@@ -9,7 +9,9 @@ function scandir(directory)
     return t
 end
 
-local file_table = scandir("./")
+local directory = "./tests/"
+
+local file_table = scandir(directory)
 local ignore = {["runtests.lua"] = true, ["luaunit.lua"] = true}
 
 local counter = 1
@@ -17,7 +19,7 @@ local fail = 0
 for i,fname in ipairs(file_table) do
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
-        local res = loadfile(fname)()
+        local res = loadfile(directory .. fname)()
 
         print("Test exited with status " .. res)
 

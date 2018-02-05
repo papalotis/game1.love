@@ -25,7 +25,6 @@ install:
 script:
   # - luacheck --std max+busted *.lua spec
   # - busted --verbose --coverage
-  - cd tests
   - lua runtests.lua
 
 # after_success:
