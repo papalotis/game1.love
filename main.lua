@@ -35,7 +35,7 @@ objects = {vector = vector,
 if not love then return end
 
 --used to store what colour we are currently
-colour_stack = {}
+-- colour_stack = {}
 
 game_colours = {
     black        = Colour( 0x30, 0x30, 0x30, 0xaa),
@@ -84,7 +84,7 @@ function love.load(arg)
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     --load the first level
-    l = Level("05.lvl")
+    l = Level("test_enemy_with_moving.lvl")
 
     --the background should not be completely black
     local col = game_colours.black
