@@ -19,6 +19,33 @@ function rectContains(x1, y1, w1, h1,  x2, y2, w2, h2)
     return x2 + w2 < x1 + w1 and x2 > x1 and y2 > y1 and y2 + h2 < y1 + h1
 end
 
+function circleCollidesWithRectanle(cx,cy,cr,rl,rt,rw,rh)
+
+        local rect_center_x = rl + rw/2
+        local rect_center_y = rt + rh/2
+
+        --get the distance from the center of the circle to the
+        --top left edge of te player
+        circleDistance_x = math.abs(cx - rect_center_x)
+        circleDistance_y = math.abs(cy - rect_center_y)
+
+        --if the distance is more than the width of the player + the radius
+        --then there is not an overlap
+        if (circleDistance_x > (rw/2 + cr)) then return false end
+        --same for y axis
+        if (circleDistance_y > (rh/2 + cr)) then return false end
+
+        --if the distance from the center to the
+        if (circleDistance_x <= (rw)) then return true end
+        if (circleDistance_y <= (rh)) then return true end
+
+        local cornerDistance_sq = math.pow(circleDistance_x - rw , 2) +
+                             math.pow(circleDistance_y - rh , 2);
+
+        return (cornerDistance_sq <= cr * cr);
+
+end
+
 
 function sign(n)
     if (n > 0) then return  1 end
@@ -57,6 +84,7 @@ function compose(f, g) return function(...) return f(g(...)) end end
 return {boolToInt = boolToInt,
         checkCollision = checkCollision,
         rectContains = rectContains,
+        circleCollidesWithRectanle = circleCollidesWithRectanle,
         sign = sign,
         collidesWithAnyWall = collidesWithAnyWall,
         curry = curry,
