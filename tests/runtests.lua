@@ -16,17 +16,20 @@ local ignore = {["runtests.lua"] = true, ["luaunit.lua"] = true}
 
 local counter = 1
 local fail = 0
+local env = os.getenv("TRAVIS")
+local failed_tests = {}
 
 
 for i,fname in ipairs(file_table) do
+
+    failed_tests[#failed_tests + 1] = false
+
+
     if (string.sub(fname, -3) == "lua" and not ignore[fname]) then
         print("\n" .. fname)
+
         local res_server, _, res_mylaptop = os.execute("lua " ..  directory .. fname)
 
-        local env = os.getenv("TRAVIS")
-
-        print(env)
-        print(res_server)
         local test_failed
         if (env == "true") then
             test_failed = res_server ~= 0
@@ -36,9 +39,22 @@ for i,fname in ipairs(file_table) do
 
 
 
-        if (test_failed) then fail = counter end
+        if (test_failed) then
+            fail = counter
+            failed_tests[fname] = true
+        end
         counter = counter + 1
     end
 end
-print(fail)
+print("\n")
+if (fail == 0) then
+    print("All tests run successfully")
+else
+    print("The following tests failed: ")
+    for k,v in pairs(failed_tests) do
+        if (v) then
+            print(k:sub(0, - 5))
+        end
+    end
+end
 os.exit(fail)
