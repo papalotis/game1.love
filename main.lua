@@ -1,19 +1,38 @@
-vector = require "src.vector"
-require "src.utils"
-require "src.class"
-require "src.Level"
-require "src.WorldObject"
-require "src.Player"
-require "src.Enemy"
-require "src.CameraFollower"
-require "src.Wall"
-require "src.MovingWall"
-require "src.LevelExit"
-require "src.TextBox"
-require "src.Colour"
-gamera = require "src.gamera"
+local vector = require "src.vector"
+local utils = require "src.utils"
+local class = require "src.class"
+local Level = require "src.Level"
+local WorldObject = require "src.WorldObject"
+local Player = require "src.Player"
+local Enemy = require "src.Enemy"
+local CameraFollower = require "src.CameraFollower"
+local Wall = require "src.Wall"
+local AlwaysActiveWall = require "src.AlwaysActiveWall"
+local MovingWall = require "src.MovingWall"
+local LevelExit = require "src.LevelExit"
+local TextBox = require "src.TextBox"
+local Colour = require "src.Colour"
+local gamera = require "src.gamera"
 
 
+objects = {vector = vector,
+ utils = utils,
+ class = class,
+ Level =  Level,
+ WorldObject = WorldObject,
+ Player = Player,
+ Enemy = Enemy,
+ CameraFollower = CameraFollower,
+ Wall = Wall,
+ AlwaysActiveWall = AlwaysActiveWall,
+ MovingWall = MovingWall,
+ LevelExit =LevelExit,
+ TextBox =TextBox,
+ Colour = Colour,
+ gamera = gamera
+}
+
+if not love then return end
 
 --used to store what colour we are currently
 colour_stack = {}
@@ -65,7 +84,7 @@ function love.load(arg)
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     --load the first level
-    l = Level("01.lvl")
+    l = Level("05.lvl")
 
     --the background should not be completely black
     local col = game_colours.black

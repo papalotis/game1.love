@@ -1,4 +1,8 @@
-Player = WorldObject:extend()
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+local Colour = require "src.Colour"
+local lmutils = require "utils.math_logic_utils"
+local Player = WorldObject:extend()
 
 function Player.init(self, x, y)
     self.isplayerobject = true
@@ -16,7 +20,11 @@ function Player.init(self, x, y)
     self.jump_force = 8
     self.jump_cap_force = 4.5
 
-    self.colour = game_colours.dark_red
+    if (game_colours) then
+        self.colour = game_colours.dark_red
+    else
+
+    end
 
     self.onplatform = nil
     self.outside_speed = vector(0,0)
@@ -82,7 +90,7 @@ function Player.moveToPos(self, x, y)
         local move_part_x = move_part * sin(phi)
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h)
+        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h)
         --we collided horizontaly with a wall
         if (wall) then
             --kill our horizontal speed and break out of the move loop
@@ -175,3 +183,5 @@ function Player.draw(self)
     Colour.pop(nil)
     -- love.graphics.setColor(r,g,b,a)
 end
+
+return Player

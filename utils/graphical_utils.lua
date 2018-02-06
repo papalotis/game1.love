@@ -1,3 +1,6 @@
+local vector = require "src.vector"
+
+
 function drawLineStripped(x1,y1, x2, y2, line_len, skip_len)
     local min, sin, cos = math.min, math.sin, math.cos
     local v = (vector(x2,y2) - vector(x1,y1)):toPolar()

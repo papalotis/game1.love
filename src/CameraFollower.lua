@@ -1,4 +1,7 @@
-CameraFollower = WorldObject:extend();
+local WorldObject = require "src.WorldObject"
+local vector = require "src.vector"
+
+local CameraFollower = WorldObject:extend();
 
 --constructor for CameraFollower class
 function CameraFollower.init(self, x, y)
@@ -94,3 +97,5 @@ function CameraFollower.draw(self)
     love.graphics.circle("fill", self.pos.x, self.pos.y, 4, 10)
 
 end
+
+return CameraFollower

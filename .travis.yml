@@ -15,18 +15,17 @@ before_install:
   - hererocks lua_install -r^ --$LUA
   - export PATH=$PATH:$PWD/lua_install/bin
 
-install:
+# install:
   # - luarocks install luacheck
   # - luarocks install busted
   # - luarocks install luacov
   # - luarocks install luacov-coveralls
-  - luarocks install luaunit
+  # - luarocks install luaunit
 
 script:
   # - luacheck --std max+busted *.lua spec
   # - busted --verbose --coverage
-  - cd tests
-  - lua runtests.lua
+  - lua tests/runtests.lua
 
 # after_success:
 #   - luacov-coveralls -e $TRAVIS_BUILD_DIR/lua_install

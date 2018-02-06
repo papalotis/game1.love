@@ -27,21 +27,24 @@ function sign(n)
 end
 
 function collidesWithAnyWall(x,y,w,h, walls)
-    walls = walls or l.world
-    for _,elem in pairs(l.world) do
-        if (elem.iswallobject and elem.active) then
-            local r = nil
-            --wall properties
-            wx, wy, ww, wh =  elem.pos.x, elem.pos.y, elem.w, elem.h
-            --if we overlap with a wall
-            if (checkCollision(x,y,w,h, wx, wy, ww, wh)) then
-                    r = elem
-                    --if we are completely inside
-                    if (rectContains(wx, wy, ww, wh, x,y,w,h)) then
-                        r = nil
-                    end
+    walls = walls or (l and l.world or nil)
+
+    if (walls) then
+        for _,elem in pairs(walls) do
+            if (elem.iswallobject and elem.active) then
+                local r = nil
+                --wall properties
+                wx, wy, ww, wh =  elem.pos.x, elem.pos.y, elem.w, elem.h
+                --if we overlap with a wall
+                if (checkCollision(x,y,w,h, wx, wy, ww, wh)) then
+                        r = elem
+                        --if we are completely inside
+                        if (rectContains(wx, wy, ww, wh, x,y,w,h)) then
+                            r = nil
+                        end
+                end
+                if (r) then return r end
             end
-            if (r) then return r end
         end
     end
     return nil

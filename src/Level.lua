@@ -1,5 +1,7 @@
+local class = require "src.class"
+
 -- class that runs the game code
-Level = class()
+local Level = class()
 
 --constructor for Level class
 function Level.init(self, filename)
@@ -122,7 +124,7 @@ function Level.readFromFile(self, filename)
             end
 
             --get the constructor of the object we want to make
-            local obj = _G[obj_type]
+            local obj = objects[obj_type]
             --r will hold the instance of the object that we will make
             local r = nil
 
@@ -287,3 +289,5 @@ function removeComments(lines)
         end
     end
 end
+
+return Level

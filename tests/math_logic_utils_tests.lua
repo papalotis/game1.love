@@ -1,8 +1,8 @@
 -- #!/usr/bin/env lua
 
 
-local lu = require('luaunit')
-local mymath = loadfile("../utils/math_logic_utils.lua")()
+local lu = require('tests.luaunit')
+local mymath = loadfile("./utils/math_logic_utils.lua")()
 
 
 --tests to check if unit library works correctly
@@ -62,4 +62,4 @@ end
 
 local runner = lu.LuaUnit.new()
 runner:setOutputType("tap")
-return runner:runSuite()
+os.exit( runner:runSuite() )
