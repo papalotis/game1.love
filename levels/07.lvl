@@ -4,7 +4,7 @@ width :2000
 height:600
 camera_left:0
 camera_top:0
-next:07.lvl
+next:08.lvl
 colour1:bright_red
 colour2:bright_green
 
@@ -18,7 +18,7 @@ TextBox,txt:The cage,x:200,y:300
 Wall,x:100,y:50,w:300,h:300,group:1
 Wall,x:150,y:100,w:200,h:200,group:2
 Wall,x:200,y:150,w:100,h:100,group:1
-MovingWall,x:1500,y:400,w:145,h:1,xdest:300,ydest:400,spd:2,wait:45
+MovingWall,x:1500,y:400,w:145,h:1,xdest:300,ydest:400,spd:2,wait:60
 
 !First obstacle
 AlwaysActiveWall,x:700,y:350,w:0,h:50
@@ -26,4 +26,6 @@ Wall,x:700,y:270,w:0,h:80,group:1
 
 !Second obstacle
 AlwaysActiveWall,x:850,y:340,w:300,h:60
-Enemy,x:1000,y:319,r:20,xspd:-0.1,yspd:0
+Enemy,x:1100,y:319,r:20,xspd:-0.2,yspd:0
+
+LevelExit,x:1400,y:330,w:200,h:72

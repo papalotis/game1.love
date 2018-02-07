@@ -2,7 +2,7 @@ local WorldObject = require "src.WorldObject"
 local vector = require "src.vector"
 
 --the generic enemy class
-Enemy = WorldObject:extend()
+local Enemy = WorldObject:extend()
 
 function Enemy.init(self, x, y, r, xspd, yspd)
     self.isenemyobject = true
