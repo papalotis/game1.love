@@ -39,6 +39,14 @@ function setAll(tbl, val)
     return tbl
 end
 
+function printTable(tbl)
+    if (type(tbl) ~= "table") then return end
+
+    for k,v in pairs(tbl) do
+        print(printf("%s: %s", tostring(k), tostring(v)))
+    end
+end
+
 return {
     getLinesFromFile = getLinesFromFile,
     removeEmptyLines = removeEmptyLines,
