@@ -94,7 +94,7 @@ function CameraFollower.update(self, player)
 end
 
 function CameraFollower.draw(self)
-    love.graphics.circle("fill", self.pos.x, self.pos.y, 4, 10)
+    -- love.graphics.circle("fill", self.pos.x, self.pos.y, 4, 10)
 
 end
 

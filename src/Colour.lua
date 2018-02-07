@@ -1,7 +1,20 @@
+local class = require "src.class"
 local Colour = class()
+
+local colour_stack = {}
 
 function Colour.init(self,r,g,b,a)
     self.iscolourobject = true
+
+    if (r and not g and not b and not a) then
+        local newr = math.floor(r / 0x10000)
+        local newg = math.floor((r % 0x10000) / 0x100)
+        local newb = ((r % 0x10000) % 0x100)
+        local newa = 0xff
+        r, g, b, a = newr, newg, newb, newa
+    end
+
+
     self.red = r or 0
     self.green = g or 0
     self.blue = b or 0
