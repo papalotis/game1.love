@@ -1,0 +1,16 @@
+!!this is a comment
+WorldProperties
+width :600
+height:600
+camera_left:0
+camera_top:0
+next:07.lvl
+colour1:bright_red
+colour2:bright_green
+
+Objects
+!The must
+CameraFollower
+
+
+TextBox,txt:Moving platforms are also a thing,x:200,y:300

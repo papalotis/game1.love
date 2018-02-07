@@ -13,12 +13,16 @@ CameraFollower
 Player
 
 AlwaysActiveWall,x:0,y:100,w:500,h:0
-TextBox,txt:Press right to go right,x:20,y:50
+
+!box1
+TextBox,txt:Press right to go right,x:20,y:50,fun:cond_lvl01_box01
 
 AlwaysActiveWall,x:0,y:100,w:0,h:400
 
 AlwaysActiveWall,x:100,y:300,w:500,h:0
-TextBox,txt:Press left to go left,x:400,y:250
+
+!box2
+TextBox,txt:Press left to go left,x:400,y:250,fun:cond_lvl01_box02
 
 AlwaysActiveWall,x:0,y:500,w:600,h:0
 
