@@ -13,6 +13,7 @@ function Player.init(self, x, y)
     self.w = 30
     self.h = 30
 
+    --physics properties
     self.hor_acc_value = 0.5
     self.hor_dec_value = 0.7
     self.max_fall_speed = 10
@@ -20,6 +21,7 @@ function Player.init(self, x, y)
     self.jump_force = 8
     self.jump_cap_force = 4.5
 
+    --draw
     if (game_colours) then
         self.colour = game_colours.dark_red
     else
@@ -28,8 +30,10 @@ function Player.init(self, x, y)
 
     self.onplatform = nil
     self.outside_speed = vector(0,0)
-
     self.stuck_counter = 0
+
+    --other
+    self.keys = {}
 end
 
 function Player.update(self, gravity)

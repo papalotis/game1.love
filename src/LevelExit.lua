@@ -3,6 +3,9 @@ local TextBox = require "src.TextBox"
 local WorldObject = require "src.WorldObject"
 local LevelExit = WorldObject:extend()
 
+local ok_message = "Press enter to exit level"
+local keys_message = "You need to collect all the keys to move to the next level"
+
 function LevelExit.init(self, x, y, w, h)
     self.islevelexitobject = true
     self.pos = vector(x,y)
@@ -12,13 +15,25 @@ function LevelExit.init(self, x, y, w, h)
 
     self.player_is_fully_contained = false
 
-    self.textbox = TextBox("Press enter to exit level", self.pos.x - self.w/2, self.pos.y - 20)
+    self.textbox = TextBox(ok_message, self.pos.x - self.w/2, self.pos.y - 20)
+
+    self.colour = game_colours.bright_blue
 
 
 end
 
-function LevelExit.update(self, player)
+
+function LevelExit.update(self, player, level_keys)
     self.player_is_fully_contained = rectContains(self.pos.x, self.pos.y, self.w, self.h,  player.pos.x, player.pos.y, player.w, player.h)
+    local player_collected_all_keys = #level_keys == #player.keys
+
+    if (not player_collected_all_keys) then
+        self.textbox.text = keys_message
+    else
+        self.textbox.text = ok_message
+    end
+
+
     if (keys["return"] and self.player_is_fully_contained) then
         return true
     end
@@ -29,8 +44,12 @@ function LevelExit.draw(self, player)
     assert(player, "You need to pass the player object to the level exit")
     assert(player.isplayerobject, "The object you passed is not a Player object")
 
-
+    self.colour:push()
     love.graphics.rectangle("line", self.pos.x, self.pos.y, self.w, self.h)
+    if (self.player_is_fully_contained) then
+        self.textbox:draw()
+    end
+    self.colour:pop()
 
     local max, min = math.max, math.min
     if (checkCollision(self.pos.x, self.pos.y, self.w, self.h,  player.pos.x, player.pos.y, player.w, player.h)) then
@@ -42,13 +61,10 @@ function LevelExit.draw(self, player)
         local height = smallest_bottom - biggest_top
 
 
+
         player.colour:push()
         love.graphics.rectangle("fill", biggest_left - 1, biggest_top - 1, width + 2, height)
         player.colour:pop()
-
-        if (self.player_is_fully_contained) then
-            self.textbox:draw()
-        end
 
     end
 end

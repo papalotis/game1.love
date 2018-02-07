@@ -37,6 +37,7 @@ function Level.reset(self)
     self.camera_top = 0
     self.width = 600
     self.height = 600
+    self.keys = {}
 end
 
 
@@ -152,6 +153,11 @@ function Level.readFromFile(self, filename)
                     --so we also add them to the moving_objects table
                     table.insert(self.moving_objects,r)
                 end
+                --we need to store which keys the player should collect
+                if (r.islevelkeyobject) then
+
+                    table.insert(self.keys,r)
+                end
 
                 --we need to store the camera follower in its own member
                 if (r.iscamerafollowerobject) then
@@ -198,9 +204,16 @@ function Level.run(self)
 
             elem:update(self.moving_objects)
 
+        elseif (elem.islevelkeyobject) then
+
+            elem:update(self.player)
+
         elseif (elem.islevelexitobject) then
-            load_next_level = elem:update(self.player)
+
+            load_next_level = elem:update(self.player, self.keys)
+
         elseif (elem.iswallobject) then
+
             elem:update(self.activeWallGroup, self.colours)
 
         elseif (elem.iscamerafollowerobject) then
