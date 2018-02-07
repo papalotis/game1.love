@@ -2,6 +2,8 @@ local vector = require "src.vector"
 local utils = require "src.utils"
 local class = require "src.class"
 local Level = require "src.Level"
+local LevelExit = require "src.LevelExit"
+local LevelGenerator = require "src.LevelGenerator"
 local WorldObject = require "src.WorldObject"
 local Player = require "src.Player"
 local Enemy = require "src.Enemy"
@@ -9,7 +11,6 @@ local CameraFollower = require "src.CameraFollower"
 local Wall = require "src.Wall"
 local AlwaysActiveWall = require "src.AlwaysActiveWall"
 local MovingWall = require "src.MovingWall"
-local LevelExit = require "src.LevelExit"
 local TextBox = require "src.TextBox"
 local Colour = require "src.Colour"
 local gamera = require "src.gamera"
@@ -19,6 +20,8 @@ objects = {vector = vector,
  utils = utils,
  class = class,
  Level =  Level,
+ LevelExit = LevelExit,
+ LevelGenerator = LevelGenerator,
  WorldObject = WorldObject,
  Player = Player,
  Enemy = Enemy,
@@ -26,7 +29,6 @@ objects = {vector = vector,
  Wall = Wall,
  AlwaysActiveWall = AlwaysActiveWall,
  MovingWall = MovingWall,
- LevelExit =LevelExit,
  TextBox =TextBox,
  Colour = Colour,
  gamera = gamera
@@ -83,8 +85,10 @@ function love.load(arg)
     --this makes the canvas not blurry
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
-    --load the first level
-    l = Level("03.lvl")
+    -- load the first level
+    l = Level("01.lvl")
+    g = LevelGenerator(100,100,10)
+    thepath = g:generatePath()
 
     --the background should not be completely black
     local col = game_colours.black
@@ -98,8 +102,8 @@ function love.load(arg)
 end
 
 function love.update(dt)
-    -- -- body...
-    -- p = l.player
+
+    p = l.player
 
     follower = l.follower
 
@@ -132,4 +136,12 @@ function love.draw()
 
         l:render()
     end)
+    for i = 1,#thepath - 1 do
+        local p1 = thepath[i]
+        local p2 = thepath[i + 1]
+        love.graphics.line(p1.x, p1.y, p2.x, p2.y)
+    end
+    love.graphics.setPointSize(5)
+    love.graphics.points(50,200,500,400)
+
 end
