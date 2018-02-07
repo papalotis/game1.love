@@ -34,7 +34,7 @@ function LevelExit.update(self, player, level_keys)
     end
 
 
-    if (keys["return"] and self.player_is_fully_contained) then
+    if (keys["return"] and self.player_is_fully_contained and player_collected_all_keys) then
         return true
     end
     return false
