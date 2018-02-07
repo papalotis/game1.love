@@ -15,6 +15,6 @@ Player,x:220,y:470
 AlwaysActiveWall,x:180,y:500,w:200,h:1
 AlwaysActiveWall,x:900,y:500,w:300,h:1
 Wall,x:380,y:500,w:520,h:1
-Enemy,x:1000,y:420,r:80,xspd:-2,yspd:0
+Enemy,x:1000,y:415,r:80,xspd:-2,yspd:0
 
 LevelExit,x:960,y:450,w:50,h:51

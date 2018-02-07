@@ -14,7 +14,7 @@ Player,x:20,y:220
 !First platform
 AlwaysActiveWall,x:0,y:250,w:450,h:0
 
-Enemy,x:300,y:235,r:15
+Enemy,x:300,y:234,r:15
 TextBox,txt:This is an enemy,x:20,y:50
 
 AlwaysActiveWall,x:0,y:800,w:600,h:2

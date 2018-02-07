@@ -77,6 +77,30 @@ function collidesWithAnyWall(x,y,w,h, walls)
     return nil
 end
 
+function collidesWithAnyWallCircle(cx,cy,cr, walls)
+    walls = walls or (l and l.world or nil)
+
+    if (walls) then
+        for _,elem in pairs(walls) do
+            if (elem.iswallobject and elem.active) then
+                local r = nil
+                --wall properties
+                wx, wy, ww, wh =  elem.pos.x, elem.pos.y, elem.w, elem.h
+                --if we overlap with a wall
+                if (circleCollidesWithRectanle(cx,cy,cr, wx, wy, ww, wh)) then
+                        r = elem
+                        --if we are completely inside
+                        if (rectContains(wx, wy, ww, wh, cx - cr,cy - cr,cr,cr)) then
+                            r = nil
+                        end
+                end
+                if (r) then return r end
+            end
+        end
+    end
+    return nil
+end
+
 function curry(f) return function (x) return function (y) return f(x,y) end end end
 
 function compose(f, g) return function(...) return f(g(...)) end end

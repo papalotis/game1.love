@@ -14,7 +14,7 @@ local TextBox = require "src.TextBox"
 local Colour = require "src.Colour"
 local gamera = require "src.gamera"
 
-
+--global variable that holds the contructor for every class
 objects = {vector = vector,
  utils = utils,
  class = class,
@@ -84,7 +84,7 @@ function love.load(arg)
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     --load the first level
-    l = Level("test_enemy_with_moving.lvl")
+    l = Level("03.lvl")
 
     --the background should not be completely black
     local col = game_colours.black
@@ -100,6 +100,7 @@ end
 function love.update(dt)
     -- -- body...
     -- p = l.player
+
     follower = l.follower
 
     local pd = l:run()
