@@ -26,6 +26,7 @@ function MovingWall.init(self, x, y, w, h, xdest,ydest, spd, wait)
 
     self.wait = wait or 60
     self.stop = 0
+    self.colour = game_colours.bright_orange
 
 end
 

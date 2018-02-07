@@ -4,6 +4,7 @@ local class = require "src.class"
 local Level = require "src.Level"
 local LevelExit = require "src.LevelExit"
 local LevelGenerator = require "src.LevelGenerator"
+local LevelKey = require "src.LevelKey"
 local WorldObject = require "src.WorldObject"
 local Player = require "src.Player"
 local Enemy = require "src.Enemy"
@@ -22,6 +23,7 @@ objects = {vector = vector,
  Level =  Level,
  LevelExit = LevelExit,
  LevelGenerator = LevelGenerator,
+ LevelKey = LevelKey,
  WorldObject = WorldObject,
  Player = Player,
  Enemy = Enemy,
@@ -40,13 +42,16 @@ if not love then return end
 -- colour_stack = {}
 
 game_colours = {
-    black        = Colour( 0x30, 0x30, 0x30, 0xaa),
-    gray         = Colour( 0x47, 0x47, 0x47, 0xaa),
-    bright_red   = Colour( 0xeb, 0x17, 0x5d, 0xaa),
-    bright_green = Colour( 0x8F, 0x97, 0x79, 0xaa),
-    dark_red     = Colour( 0xcc, 0x52, 0x7a, 0xaa),
-    light_gray   = Colour( 0xa8, 0xa7, 0xa8, 0xaa),
-    white        = Colour( 0xdd, 0xdd, 0xdd, 0xaa)
+    black          = Colour( 0x30, 0x30, 0x30, 0xaa),
+    gray           = Colour( 0x47, 0x47, 0x47, 0xaa),
+    bright_red     = Colour( 0xeb, 0x17, 0x5d, 0xaa),
+    bright_green   = Colour( 0x8F, 0x97, 0x79, 0xaa),
+    bright_blue    = Colour( 0x43, 0xb2, 0xcc, 0xaa),
+    bright_orange  = Colour( 0xd6, 0xae, 0x1d, 0xaa),
+    dark_blue      = Colour( 0x30, 0x75, 0xb2, 0xaa),
+    dark_red       = Colour( 0xcc, 0x52, 0x7a, 0xaa),
+    light_gray     = Colour( 0xa8, 0xa7, 0xa8, 0xaa),
+    white          = Colour( 0xdd, 0xdd, 0xdd, 0xaa)
 }
 
 
@@ -86,9 +91,7 @@ function love.load(arg)
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     -- load the first level
-    l = Level("01.lvl")
-    g = LevelGenerator(100,100,10)
-    thepath = g:generatePath()
+    l = Level("08.lvl")
 
     --the background should not be completely black
     local col = game_colours.black
@@ -136,12 +139,6 @@ function love.draw()
 
         l:render()
     end)
-    for i = 1,#thepath - 1 do
-        local p1 = thepath[i]
-        local p2 = thepath[i + 1]
-        love.graphics.line(p1.x, p1.y, p2.x, p2.y)
-    end
-    love.graphics.setPointSize(5)
-    love.graphics.points(50,200,500,400)
+
 
 end
