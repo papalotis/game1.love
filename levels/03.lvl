@@ -1,7 +1,7 @@
 !!this is a comment
 WorldProperties
 width :600
-height:1000
+height:600
 next:04.lvl
 colour1:dark_red
 colour2:bright_green
@@ -14,11 +14,11 @@ Player,x:20,y:220
 !First platform
 AlwaysActiveWall,x:0,y:250,w:450,h:0
 
-Enemy,x:300,y:234,r:15
-TextBox,txt:This is an enemy,x:20,y:50
+Enemy,x:300,y:480,r:15
+TextBox,txt:This is an enemy,x:-100,y:-50,fun:cond_lvl03_box01
 
-AlwaysActiveWall,x:0,y:800,w:600,h:2
 AlwaysActiveWall,x:0,y:0,w:1,h:1000
 AlwaysActiveWall,x:600,y:0,w:1,h:1000
+AlwaysActiveWall,x:0,y:500,w:600,h:2
 
-LevelExit,x:0,y:750,w:60,h:50
+LevelExit,x:0,y:450,w:60,h:50

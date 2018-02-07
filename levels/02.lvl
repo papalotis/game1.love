@@ -20,7 +20,7 @@ AlwaysActiveWall,x:0,y:100,w:0,h:400
 AlwaysActiveWall,x:550,y:100,w:0,h:200
 
 !Second platform
-TextBox,txt:Press up to jump,x:400,y:200
+TextBox,txt:Press up to jump,x:400,y:200, fun:cond_lvl02_box02
 
 !Vertical wall
 AlwaysActiveWall,x:400,y:220,w:0,h:80
