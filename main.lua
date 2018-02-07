@@ -91,7 +91,7 @@ function love.load(arg)
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     -- load the first level
-    l = Level("08.lvl")
+    l = Level("01.lvl")
 
     --the background should not be completely black
     local col = game_colours.black
