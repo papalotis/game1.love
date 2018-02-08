@@ -87,13 +87,17 @@ end
 
 function love.load(arg)
 
+    local level_to_start = arg[2] or "01.lvl"
+
+
     --this makes the canvas not blurry
     love.graphics.setDefaultFilter( "nearest", "nearest" )
 
     -- load the first level
-    l = Level("01.lvl")
+    l = Level(level_to_start)
 
-    --the background should not be completely black
+    --the background should not be completely black (as in [0,0,0])
+    --but our version of black
     local col = game_colours.black
     love.graphics.setBackgroundColor(col.red, col.green, col.blue, col.alpha)
 

@@ -24,7 +24,7 @@ end
 
 function TextBox.draw(self)
 
-    if (self.show_when()) then
+    if (self.show_when(self)) then
         local r = self.options.r or 0
         local sx, sy = self.options.sx or 1, self.options.sy or 1
         local ox, oy = self.options.ox or 0, self.options.sy or 0

@@ -15,6 +15,6 @@ Player,x:220,y:470
 TextBox,txt:Watch out for this big fella,x:100,y:400
 AlwaysActiveWall,x:180,y:500,w:200,h:0
 Wall,x:380,y:500,w:800,h:0
-Enemy,x:1000,y:415,r:55,xspd:-3,yspd:0
+Enemy,x:1000,y:350,r:55,xspd:-3,yspd:0
 
 LevelExit,x:960,y:450,w:50,h:51
