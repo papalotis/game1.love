@@ -42,7 +42,13 @@ function Player.update(self, gravity)
     self:checkIfStuck()
 
     if (self.onplatform) then
-        self.pos.y = self.onplatform.pos.y - self.h
+        local proposed_y = self.onplatform.pos.y - self.h
+        if (not (collidesWithAnyWall(self.pos.x, proposed_y, self.w, self.h))) then
+            self.pos.y = self.onplatform.pos.y - self.h
+        else
+
+            self.onplatform.pos.y = self.onplatform.pos.y - sign(self.onplatform.speed.y) * 3
+        end
     else
         self:applyGravity(gravity)
     end

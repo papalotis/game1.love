@@ -19,6 +19,7 @@ function MovingWall.init(self, x, y, w, h, xdest,ydest, spd, wait)
     self.orig_dest = self.dest:clone()
 
     self.spd = spd or 1
+    self.speed = vector(0,0)
 
     self.group = group or 1
 
@@ -33,13 +34,13 @@ end
 function MovingWall.update(self, moving_objects)
 
     self.stop = self.stop - 1
-    if (self.stop > 0) then return end
 
     local speed = self.dest - self.pos
 
     local dist = speed:len()
 
     speed:trimInplace(self.spd)
+    self.speed = speed:clone()
 
 
     for _,v in pairs(moving_objects) do
@@ -67,6 +68,7 @@ function MovingWall.update(self, moving_objects)
 
     end
 
+    if (self.stop > 0) then return end
 
     if (dist < self.spd) then
         --swap origin and destination
