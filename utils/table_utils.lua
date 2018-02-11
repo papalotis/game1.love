@@ -52,5 +52,6 @@ return {
     removeEmptyLines = removeEmptyLines,
     choose = choose,
     chooseRandomFromTable = chooseRandomFromTable,
-    setAll = setAll
+    setAll = setAll,
+    printTable = printTable
 }
