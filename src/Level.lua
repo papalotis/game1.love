@@ -228,7 +228,15 @@ function Level.run(self)
     --if the level exit object says that we should move to the next levels
     --then move to the next level
     if (load_next_level) then
-        self:loadNextLevel()
+        --if the level exit instance doesn't specify
+        --what the next level is, then load this levels next level
+        if (load_next_level == "") then
+            self:loadNextLevel()
+        --otherwise load the specified level
+        else
+            self:load(load_next_level)
+
+        end
     end
 
     --if an enemy claims that it killed the player, reload the level
