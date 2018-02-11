@@ -10,6 +10,7 @@ function TextBox.init(self, txt, x, y, show_file)
     self.text = txt or ""
     self.x, self.y = x or 0, y or 0
     self.options = {}
+    self.colour = game_colours.white:clone()
 
     local fun = nil
     if (show_file) then
@@ -25,12 +26,16 @@ end
 function TextBox.draw(self)
 
     if (self.show_when(self)) then
+
+
         local r = self.options.r or 0
         local sx, sy = self.options.sx or 1, self.options.sy or 1
         local ox, oy = self.options.ox or 0, self.options.sy or 0
         local kx, ky = self.options.kx or 0, self.options.ky or 0
 
+        self.colour:push()
         love.graphics.print(self.text, self.x, self.y, r, sx, sy, ox, oy, kx, ky)
+        self.colour:pop()
     end
 end
 
