@@ -1,0 +1,14 @@
+!From this "menu" level the player can choose which world they want to run
+WorldProperties
+width :600
+height:600
+next:01.lvl
+
+Objects
+!The must
+CameraFollower
+Player,x:50,y:50
+
+AlwaysActiveWall,x:10,y:100,w:400,h:0
+
+LevelExit,x:300,y:50,w:50,h:50,next:01.lvl,text:Tutorial
