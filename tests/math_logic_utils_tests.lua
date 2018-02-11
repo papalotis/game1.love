@@ -70,6 +70,14 @@ function testcircleRectCollision()
     assertEquals(ccwr(0,0,50, -100, -100, 100, 51), true)
 end
 
+function testConstraint()
+    local constraint = mymath.constraint
+
+    assertEquals(constraint(5, 0, 10), 5)
+    assertEquals(constraint(-5, 0, 10), 0)
+    assertEquals(constraint(15, 0, 10), 10)
+end
+
 
 local runner = lu.LuaUnit.new()
 runner:setOutputType("tap")

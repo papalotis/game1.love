@@ -101,6 +101,10 @@ function collidesWithAnyWallCircle(cx,cy,cr, walls)
     return nil
 end
 
+function constraint(val, min, max)
+    return math.max(min, math.min(val, max))
+end
+
 function curry(f) return function (x) return function (y) return f(x,y) end end end
 
 function compose(f, g) return function(...) return f(g(...)) end end
@@ -108,9 +112,10 @@ function compose(f, g) return function(...) return f(g(...)) end end
 return {boolToInt = boolToInt,
         checkCollision = checkCollision,
         rectContains = rectContains,
-        circleCollidesWithRectanle = circleCollidesWithRectanle,
         sign = sign,
+        circleCollidesWithRectanle = circleCollidesWithRectanle,
         collidesWithAnyWall = collidesWithAnyWall,
+        constraint = constraint,
         curry = curry,
         compose = compose
        }
