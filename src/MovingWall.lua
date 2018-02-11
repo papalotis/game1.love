@@ -61,8 +61,8 @@ function MovingWall.update(self, moving_objects)
 
 
         if (object_is_touching_from_above) then
-
-            v.outside_speed = v.outside_speed + vector(speed.x,0)
+            local s = (self.stop <= 0) and speed.x or 0
+            v.outside_speed = v.outside_speed + vector(s,0)
             v.onplatform = self
         end
 
