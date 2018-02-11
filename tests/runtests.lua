@@ -9,7 +9,7 @@ function scandir(directory)
     return t
 end
 
-local directory = "./tests/"
+local directory = "/tests/"
 --get all the files in the directory where the tests are
 local file_table = scandir(directory)
 
