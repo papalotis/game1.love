@@ -41,15 +41,20 @@ function Player.update(self, gravity)
 
     self:checkIfStuck()
 
+    --if the player is on a moving wall
     if (self.onplatform) then
+
+        --check if were we want to go vertically is a valid position
         local proposed_y = self.onplatform.pos.y - self.h
         if (not (collidesWithAnyWall(self.pos.x, proposed_y, self.w, self.h))) then
+            --if so move there
             self.pos.y = self.onplatform.pos.y - self.h
         else
-
+            --otherwise, force the moving wall to go some pixels down
             self.onplatform.pos.y = self.onplatform.pos.y - sign(self.onplatform.speed.y) * 3
         end
     else
+        --we want gravitiy to apply only when we aren't on a moving platform
         self:applyGravity(gravity)
     end
     self:setUserAcceleration()
