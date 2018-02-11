@@ -14,16 +14,16 @@ function Player.init(self, x, y)
     self.h = 30
 
     --physics properties
-    self.hor_acc_value = 0.5
-    self.hor_dec_value = 0.7
-    self.max_fall_speed = 10
-    self.max_hor_speed = 3
-    self.jump_force = 8
-    self.jump_cap_force = 4.5
+    self.hor_acc_value = 40/100
+    self.hor_dec_value = 35/100
+    self.max_fall_speed = 1000/100
+    self.max_hor_speed = 300/100
+    self.jump_force = 800/100
+    self.jump_cap_force = 450/100
 
     --draw
     if (game_colours) then
-        self.colour = game_colours.dark_red
+        self.colour = game_colours.dark_red:clone()
     else
 
     end
@@ -36,10 +36,22 @@ function Player.init(self, x, y)
     self.keys = {}
 end
 
+local function checkIfStuck(self)
+    if (collidesWithAnyWall(self.pos.x, self.pos.y, self.w, self.h)) then
+        self.stuck_counter = self.stuck_counter + 1
+    else
+        self.stuck_counter = 0
+    end
+
+    if (self.stuck_counter > 4 * 60) then
+        self.pos = self.orig_pos:clone()
+    end
+end
+
 function Player.update(self, gravity)
     local abs, min, max = math.abs, math.min, math.max
 
-    self:checkIfStuck()
+    checkIfStuck(self)
 
     --if the player is on a moving wall
     if (self.onplatform) then
@@ -142,17 +154,6 @@ function Player.moveToPos(self, x, y)
 
 end
 
-function Player.checkIfStuck(self)
-    if (collidesWithAnyWall(self.pos.x, self.pos.y, self.w, self.h)) then
-        self.stuck_counter = self.stuck_counter + 1
-    else
-        self.stuck_counter = 0
-    end
-
-    if (self.stuck_counter > 4 * 60) then
-        self.pos = self.orig_pos:clone()
-    end
-end
 
 function Player.applyGravity(self, grav)
     self.acc.y = self.acc.y + grav
