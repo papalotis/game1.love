@@ -36,8 +36,10 @@ function Player.init(self, x, y)
     self.keys = {}
 end
 
+local walls_to_collide = l and l.walls.playerwalls or nil
+
 local function checkIfStuck(self)
-    if (collidesWithAnyWall(self.pos.x, self.pos.y, self.w, self.h)) then
+    if (collidesWithAnyWall(self.pos.x, self.pos.y, self.w, self.h, walls_to_collide)) then
         self.stuck_counter = self.stuck_counter + 1
     else
         self.stuck_counter = 0
@@ -109,7 +111,7 @@ function Player.moveToPos(self, x, y)
     local speedLen = speedCopy.y
     local phi = speedCopy.x
 
-    local walls_to_collide = l and l.walls.playerwalls or nil
+
 
     --while we haven't moved all the way we can
     while (speedLen > 0) do

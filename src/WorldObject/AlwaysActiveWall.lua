@@ -1,4 +1,4 @@
-local Wall = require "src.Wall"
+local Wall = require "src.WorldObject.Wall"
 
 --Wall class, that is not affected by the user changing the active group
 --in the game

@@ -1,5 +1,5 @@
 local vector = require "src.vector"
-local TextBox = require "src.TextBox"
+local TextBox = require "src.WorldObject.TextBox"
 local WorldObject = require "src.WorldObject"
 
 --class that handles level changes

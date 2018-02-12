@@ -1,4 +1,4 @@
-local Wall = require "src.Wall"
+local Wall = require "src.WorldObject.Wall"
 local vector = require "src.vector"
 
 local MovingWall = Wall:extend()

@@ -1,4 +1,4 @@
-local Wall = require "src.Wall"
+local Wall = require "src.WorldObject.Wall"
 
 
 --Wall class, that is used to manipulate the path of enemies
