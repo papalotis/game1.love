@@ -11,6 +11,7 @@ local Enemy = require "src.Enemy"
 local CameraFollower = require "src.CameraFollower"
 local Wall = require "src.Wall"
 local AlwaysActiveWall = require "src.AlwaysActiveWall"
+local EnemyWall = require "src.EnemyWall"
 local MovingWall = require "src.MovingWall"
 local TextBox = require "src.TextBox"
 local Colour = require "src.Colour"
@@ -30,6 +31,7 @@ objects = {vector = vector,
  CameraFollower = CameraFollower,
  Wall = Wall,
  AlwaysActiveWall = AlwaysActiveWall,
+ EnemyWall = EnemyWall,
  MovingWall = MovingWall,
  TextBox =TextBox,
  Colour = Colour,
