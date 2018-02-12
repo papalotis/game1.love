@@ -122,6 +122,8 @@ function Enemy.moveToPos(self, x, y)
     --store where we were before moving
     local start_pos_x = self.pos.x
 
+    local walls_to_collide = l and l.walls.enemywalls or nil
+
     --while we should still move
     while (speedLen > 0) do
         --get by how much we will move
@@ -139,7 +141,7 @@ function Enemy.moveToPos(self, x, y)
         local newcx, newcy = self.pos.x + self.r + move_part_x, self.pos.y + self.r
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r)
+        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r, walls_to_collide)
 
         --we collided horizontaly with a wall
         if (wall) then
@@ -175,7 +177,7 @@ function Enemy.moveToPos(self, x, y)
         local newcx, newcy = self.pos.x + self.r, self.pos.y + self.r + move_part_y
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r)
+        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r, walls_to_collide)
         --we collided vertically with a wall
         if (wall) then
             --kill our vertical speed and break out of the move loop

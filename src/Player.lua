@@ -108,6 +108,9 @@ function Player.moveToPos(self, x, y)
     local speedCopy = self.speed:clone():toPolar()
     local speedLen = speedCopy.y
     local phi = speedCopy.x
+
+    local walls_to_collide = l and l.walls.playerwalls or nil
+
     --while we haven't moved all the way we can
     while (speedLen > 0) do
         local move_part = min(speedLen, 1)
@@ -117,7 +120,8 @@ function Player.moveToPos(self, x, y)
         local move_part_x = move_part * sin(phi)
 
         --check if we would collide in the new position
-        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h, l.walls.playerwalls)
+
+        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h, walls_to_collide)
         --we collided horizontaly with a wall
         if (wall) then
             --kill our horizontal speed and break out of the move loop
@@ -140,7 +144,7 @@ function Player.moveToPos(self, x, y)
         local move_part_y = move_part * cos(phi)
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWall(self.pos.x, self.pos.y + move_part_y, self.w, self.h)
+        local wall = lmutils.collidesWithAnyWall(self.pos.x, self.pos.y + move_part_y, self.w, self.h, walls_to_collide)
         --we collided vertically with a wall
         if (wall) then
             --kill our vertical speed and break out of the move loop
