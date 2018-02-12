@@ -224,10 +224,14 @@ function Enemy.draw(self)
     local center_y = self.pos.y + r
 
 
+
     self.colour:push()
 
     local prev_width = love.graphics.getLineWidth()
     local line_width = 3/50 * r
+    --there is a bug in love and a circle of line_width 0.6 is not drawn
+    line_width = line_width ~= 0.6 and line_width or 0.61
+
     setWidth(line_width)
 
     --calculate a smaller radius so that the outer edge
