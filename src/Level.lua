@@ -25,6 +25,7 @@ end
 function Level.reset(self)
     self.world = {}
     self.moving_objects = {}
+    self.walls = {playerwalls = {}, enemywalls = {}}
     self.player = nil
     self.follower = nil
     self.colours = {}
@@ -139,6 +140,16 @@ function Level.readFromFile(self, filename)
             if (r) then
                 --insert it into the world
                 table.insert(self.world,r)
+
+
+                if (r.isenemywallobject) then
+                    table.insert(self.walls.enemywalls,r)
+                end
+
+                if (r.iswallobject and not r.isenemywallobject) then
+                    table.insert(self.walls.enemywalls,r)
+                    table.insert(self.walls.playerwalls,r)
+                end
 
                 --if the object we made was of type player
                 if (r.isplayerobject) then

@@ -10,6 +10,8 @@ function Wall.init(self, x, y, w, h, group)
     self.active = true
 
     self.group = group or 1
+
+    self:childinit()
 end
 
 function Wall.update(self, globalGroup, colours)
@@ -19,6 +21,8 @@ function Wall.update(self, globalGroup, colours)
     self.active = self.group == globalGroup
 
 end
+
+function Wall.childinit() return false end
 
 function Wall.draw(self)
     if (not self.colour) then

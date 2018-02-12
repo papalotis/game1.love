@@ -117,7 +117,7 @@ function Player.moveToPos(self, x, y)
         local move_part_x = move_part * sin(phi)
 
         --check if we would collide in the new position
-        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h)
+        local wall = lmutils.collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h, l.walls.playerwalls)
         --we collided horizontaly with a wall
         if (wall) then
             --kill our horizontal speed and break out of the move loop
