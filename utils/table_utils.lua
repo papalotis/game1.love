@@ -43,7 +43,7 @@ function printTable(tbl)
     if (type(tbl) ~= "table") then return end
 
     for k,v in pairs(tbl) do
-        print(printf("%s: %s", tostring(k), tostring(v)))
+        printf("%s: %s", tostring(k), tostring(v))
     end
 end
 

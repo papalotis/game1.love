@@ -107,4 +107,5 @@ function Colour.apply(self)
     end
 end
 
+
 return Colour
