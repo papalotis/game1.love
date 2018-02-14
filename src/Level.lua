@@ -121,6 +121,12 @@ function Level.readFromFile(self, filename)
                 --attempt to convert the value to a number
                 local val = tonumber(substr[2]) or substr[2]
 
+                --if the value was a colour then load the colour object
+                --instead of the string
+                if(game_colours[val]) then
+                    val = game_colours[val]
+                 end
+
                 --insert the value to the arguments table
                 table.insert(vals,val)
             end
@@ -265,8 +271,16 @@ function Level.render(self)
     --like the run method, different objects require different arguments
     --in their draw methods, so there is an if... that gives each
     --object the appropriate arguments
+
     for _,elem in pairs(self.world) do
-        if (not elem.ignore_camera and not elem.isplayerobject) then
+        if (elem.isbackgroundgraphicobject) then
+            elem:draw()
+        end
+    end
+
+
+    for _,elem in pairs(self.world) do
+        if (not (elem.ignore_camera or elem.isplayerobject or elem.isbackgroundgraphicobject)) then
             if (elem.islevelexitobject) then
                 elem:draw(self.player)
             else

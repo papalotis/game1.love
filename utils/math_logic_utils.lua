@@ -46,6 +46,18 @@ function circleCollidesWithRectanle(cx,cy,cr,rl,rt,rw,rh)
 
 end
 
+function calculatePointsOfPolygon (cx, cy, num, len, offset)
+    local points = {}
+
+    local inc = 2 * math.pi / num
+    for i = 0, 2 * math.pi, inc do
+        table.insert(points, cx + math.cos(i + offset) * len)
+        table.insert(points, cy + math.sin(i + offset) * len)
+    end
+
+    return points
+end
+
 
 function sign(n)
     if (n > 0) then return  1 end

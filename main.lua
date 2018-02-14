@@ -14,6 +14,7 @@ local AlwaysActiveWall = require "src.WorldObject.AlwaysActiveWall"
 local EnemyWall = require "src.WorldObject.EnemyWall"
 local MovingWall = require "src.WorldObject.MovingWall"
 local TextBox = require "src.WorldObject.TextBox"
+local BackgroundGraphic = require "src.WorldObject.BackgroundGraphic"
 local Colour = require "src.Colour"
 local gamera = require "src.gamera"
 
@@ -34,6 +35,7 @@ objects = {vector = vector,
  EnemyWall = EnemyWall,
  MovingWall = MovingWall,
  TextBox =TextBox,
+ BackgroundGraphic = BackgroundGraphic,
  Colour = Colour,
  gamera = gamera
 }
@@ -55,7 +57,6 @@ game_colours = {
     light_gray     = Colour( 0xa8, 0xa7, 0xa8, 0xf0),
     white          = Colour( 0xdd, 0xdd, 0xdd, 0xf0)
 }
-
 
 
 --the default colour is white
@@ -89,7 +90,7 @@ end
 
 function love.load(arg)
 
-    local level_to_start = arg[2] or "01.lvl"
+    local level_to_start = arg[2] or "level_select.lvl"
 
 
     --this makes the canvas not blurry

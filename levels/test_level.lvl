@@ -1,0 +1,16 @@
+!!this is a comment
+WorldProperties
+width :600
+height:600
+camera_left:0
+camera_top:0
+next:07.lvl
+colour1:bright_red
+colour2:bright_green
+
+Objects
+!The must
+CameraFollower
+
+! mode, cx, cy, num_sides, side_len, colour)
+BackgroundGraphic,mode:fill, cx:100, cy:100, num_sides:5.5, side_len:100, colour:bright_orange, fun:testing_polygon
