@@ -17,5 +17,6 @@ AlwaysActiveWall,x:0,y:300,w:450,h:0
 TextBox,txt:Hold space to make the wall disappear,x:-12,y:40
 
 Wall,x:200,y:100,w:0,h:200,group:1
-Wall,x:450,y:300,w:300,h:0,group:2
-LevelExit,x:500,y:250,w:60,h:50
+Wall,x:450,y:300,w:200,h:0,group:2
+AlwaysActiveWall,x:650,y:300,w:170,h:0
+LevelExit,x:700,y:250,w:60,h:50

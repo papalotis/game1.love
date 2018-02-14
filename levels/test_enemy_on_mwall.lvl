@@ -12,5 +12,7 @@ Objects
 !The must
 CameraFollower
 
+Enemy,x:550,y:260,r:20,xspd:-3,yspd:0
+!Player,x:400,y:250
 
-TextBox,txt:Moving platforms are also a thing,x:200,y:300
+MovingWall,x:200,y:370,w:500,h:0,xdest:200,ydest:50,spd:2,wait:60
