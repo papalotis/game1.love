@@ -48,14 +48,22 @@ function Enemy.update(self, player, gravity)
     --if the enemy is on a moving platform, then
     --we don't want gravity to affect, just go with the platform
     if (self.onplatform) then
-        self.pos.y = self.onplatform.pos.y - self.h
-
-    --otherwise apply gravity
+        --check if were we want to go vertically is a valid position
+        local proposed_y = self.onplatform.pos.y - self.h
+        -- if (not (collidesWithAnyWallCircle(self.pos.x, proposed_y, self.r, l.walls.enemywalls))) then
+            --if so move there
+            self.pos.y = self.onplatform.pos.y - self.h
+        -- else
+            --otherwise, force the moving wall to go some pixels down
+            -- self.onplatform.pos.y = self.onplatform.pos.y - sign(self.onplatform.speed.y) * 3
+        -- end
     else
+        -- otherwise apply gravity
         self:applyGravity(gravity)
     end
-
+    self.speed = self.speed:clone()
     local speedPrev = self.speed:clone()
+    -- print(speedPrev)
 
     --apply the horizontal speed by possible moving platforms
     self.speed = self.speed + self.outside_speed
@@ -77,12 +85,12 @@ function Enemy.update(self, player, gravity)
     self.angle = (self.angle - delta_angle) % (2 * math.pi)
 
     --check if there is a wall to the right of us
-    if (collidesWithAnyWall(self.pos.x + 1, self.pos.y, self.w, self.h)) then
+    if (collidesWithAnyWall(self.pos.x + 1, self.pos.y, self.w, self.h, l.walls.enemywalls)) then
         --if so move tp the left
         self.speed.x = -math.abs(speedPrev.x)
     end
     --same for left to us
-    if (collidesWithAnyWall(self.pos.x - 1, self.pos.y, self.w, self.h)) then
+    if (collidesWithAnyWall(self.pos.x - 1, self.pos.y, self.w, self.h, l.walls.enemywalls)) then
         self.speed.x = math.abs(speedPrev.x)
     end
 
@@ -97,8 +105,11 @@ function Enemy.update(self, player, gravity)
         collision = self:collideWithPlayer(player)
     end
 
+    -- io.read()
+
     --tell the game if we collided or not
     return collision
+
 
 
 
@@ -138,10 +149,10 @@ function Enemy.moveToPos(self, x, y)
         --by multiplying with sin
         local move_part_x = move_part * sin(phi)
 
-        local newcx, newcy = self.pos.x + self.r + move_part_x, self.pos.y + self.r
+        -- local newcx, newcy = self.pos.x + self.r + move_part_x, self.pos.y + self.r
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r, walls_to_collide)
+        local wall = collidesWithAnyWall(self.pos.x + move_part_x, self.pos.y, self.w, self.h, walls_to_collide)
 
         --we collided horizontaly with a wall
         if (wall) then
@@ -174,10 +185,10 @@ function Enemy.moveToPos(self, x, y)
         --multiplying with cos
         local move_part_y = move_part * cos(phi)
 
-        local newcx, newcy = self.pos.x + self.r, self.pos.y + self.r + move_part_y
+        -- local newcx, newcy = self.pos.x + self.r, self.pos.y + self.r + move_part_y
 
         --check if we would collide in the new position
-        local wall = collidesWithAnyWallCircle(newcx, newcy, self.r, walls_to_collide)
+        local wall = collidesWithAnyWall(self.pos.x, self.pos.y + move_part_y, self.w, self.h, walls_to_collide)
         --we collided vertically with a wall
         if (wall) then
             --kill our vertical speed and break out of the move loop
